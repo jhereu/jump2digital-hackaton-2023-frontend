@@ -20,7 +20,7 @@ const defaultProps = {};
 const _App: FC<_AppSafeProps> = () => {
   return (
     <div className="justify-center mx-auto w-10/12">
-      <a href="/" target="_blank">
+      <a href="/" target="_self">
         <img
           src={logo}
           width={600}

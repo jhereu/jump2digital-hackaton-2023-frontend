@@ -1,6 +1,12 @@
 import { BASE_URL, CHARACTER_SLUG_URL } from "@/config/urls";
-import { ApiPaginationParams, ApiPaginationResponse } from "@/lib/store/shared/ApiPagination";
-import { Character, CharacterFilters } from "@/lib/store/slices/Character/Character.type";
+import {
+  ApiPaginationParams,
+  ApiPaginationResponse,
+} from "@/lib/store/shared/ApiPagination";
+import {
+  Character,
+  CharacterFilters,
+} from "@/lib/store/slices/Character/Character.type";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const characterApi = createApi({
