@@ -3,6 +3,8 @@ import { FC } from "react";
 import logo from "@/assets/images/Rick_and_Morty.svg";
 import CharacterList from "@/components/CharacterList";
 
+import { Footer } from "./Footer";
+
 /**
  * Props del componente `_App`
  */
@@ -27,6 +29,7 @@ const _App: FC<_AppSafeProps> = () => {
         />
       </a>
       <CharacterList />
+      <Footer />
     </div>
   );
 };

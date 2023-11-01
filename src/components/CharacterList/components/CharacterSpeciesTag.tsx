@@ -108,7 +108,7 @@ export const CharacterSpeciesTag: FC<CharacterSpeciesTagProps> = (props) => {
   return (
     <span
       title={title}
-      className={`${data.containerClasses} rounded px-1 text-sm mx-1`}
+      className={`${data.containerClasses || ""} rounded px-1 text-sm mx-1`}
     >
       {data.Icon} {data.text || text}
     </span>

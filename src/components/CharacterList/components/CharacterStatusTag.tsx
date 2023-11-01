@@ -36,7 +36,7 @@ export const CharacterStatusTag: FC<CharacterStatusTagProps> = (props) => {
   return (
     <p
       title={props.status}
-      className={`${data.containerClasses} rounded px-1 text-sm mx-1`}
+      className={`${data.containerClasses || ""} rounded px-1 text-sm mx-1`}
     >
       {data.Icon} {data.text || props.status}
     </p>

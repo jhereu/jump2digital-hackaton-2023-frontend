@@ -59,7 +59,7 @@ export const CharacterGenderTag: FC<CharacterGenderTagProps> = ({ gender }) => {
     <>
       <span
         title={`Gender: ${gender}`}
-        className={`${containerClasses} rounded px-1 text-sm mx-1`}
+        className={`${containerClasses || ""} rounded px-1 text-sm mx-1`}
       >
         {Icon} {data.text || gender}
       </span>

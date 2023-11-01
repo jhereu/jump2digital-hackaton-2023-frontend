@@ -4,11 +4,16 @@ import { useGetCharactersQuery } from "@/lib/store/slices/Character/Character.ap
 import { CharacterFilters } from "@/lib/store/slices/Character/Character.type";
 
 import { CharacterCard } from "./CharacterCard";
+import { CharacterCardSkeleton } from "./CharacterCardSkeleton";
 import { CharacterSearch } from "./CharacterSearch";
 
 interface CharacterListProps {
   search?: string;
 }
+
+const skeletonCards = Array(20).map((_, i) => (
+  <CharacterCardSkeleton key={`character-skeleton-${i}`} />
+));
 
 /**
  * Definición del componente `CharacterList`
@@ -17,12 +22,13 @@ export const CharacterList: FC<CharacterListProps> = () => {
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState<CharacterFilters>({});
 
-  const { data, isLoading, isError } = useGetCharactersQuery({
+  const { data, isLoading, isFetching, isError } = useGetCharactersQuery({
     page,
     filters,
   });
 
   const buttonGroup = useMemo(() => {
+    const lastPage = data?.info?.pages || 1;
     const isFirstPage = !data?.info.prev;
     const isLastPage = !data?.info.next;
 
@@ -47,7 +53,9 @@ export const CharacterList: FC<CharacterListProps> = () => {
         >
           Previous
         </button>
-        <span>Page {page}</span>
+        <span>
+          Page {page} / {lastPage || 1}
+        </span>
         <button
           className={buttonClassNames}
           onClick={() => setPage(page + 1)}
@@ -60,8 +68,8 @@ export const CharacterList: FC<CharacterListProps> = () => {
   }, [data, page]);
 
   const content = useMemo(() => {
-    if (isLoading) {
-      return "Loading...";
+    if (isLoading || isFetching) {
+      return skeletonCards;
     }
 
     if (isError || !data?.results?.length) {
@@ -76,12 +84,17 @@ export const CharacterList: FC<CharacterListProps> = () => {
       <>
         <div className="flex flex-wrap justify-center">
           {data.results.map((character) => {
-            return <CharacterCard key={character.id} character={character} />;
+            return (
+              <CharacterCard
+                key={`character-id-${character.id}`}
+                character={character}
+              />
+            );
           })}
         </div>
       </>
     );
-  }, [data, isError, isLoading]);
+  }, [data, isError, isFetching, isLoading]);
 
   const handleFilterChanged = useCallback((filters: CharacterFilters) => {
     setFilters(filters);
