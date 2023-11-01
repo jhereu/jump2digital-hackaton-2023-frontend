@@ -1,9 +1,7 @@
 import { FC } from "react";
 
-import logo from "@/assets/Rick_and_Morty.svg";
+import logo from "@/assets/images/Rick_and_Morty.svg";
 import CharacterList from "@/components/CharacterList";
-
-import styles from "../styles.module.css";
 
 /**
  * Props del componente `_App`
@@ -19,18 +17,17 @@ const defaultProps = {};
  */
 const _App: FC<_AppSafeProps> = () => {
   return (
-    <>
-      <div>
-        <a href="/" target="_blank">
-          <img
-            src={logo}
-            className={styles.logo}
-            alt="Rick and Morty Glossarium"
-          />
-        </a>
-      </div>
+    <div className="justify-center mx-auto w-10/12">
+      <a href="/" target="_blank">
+        <img
+          src={logo}
+          width={600}
+          className="mx-auto max-w-full mb-24"
+          alt="Rick and Morty Glossarium"
+        />
+      </a>
       <CharacterList />
-    </>
+    </div>
   );
 };
 

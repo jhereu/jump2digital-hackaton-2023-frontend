@@ -1,71 +1,99 @@
-import { FC, useMemo, useState } from "react";
+import { FC, useCallback, useMemo, useState } from "react";
 
 import { useGetCharactersQuery } from "@/lib/store/slices/Character/Character.api";
+import { CharacterFilters } from "@/lib/store/slices/Character/Character.type";
 
-import CharacterCard from "./CharacterCard";
+import { CharacterCard } from "./CharacterCard";
+import { CharacterSearch } from "./CharacterSearch";
 
-// import styles from '../styles.module.less';
-
-/**
- * Props del componente `CharacterList`
- */
-export type CharacterListSafeProps = CharacterListProps & typeof defaultProps;
-
-export interface CharacterListProps {
+interface CharacterListProps {
   search?: string;
 }
-
-const defaultProps = {};
 
 /**
  * Definición del componente `CharacterList`
  */
-const CharacterList: FC<CharacterListSafeProps> = () => {
+export const CharacterList: FC<CharacterListProps> = () => {
   const [page, setPage] = useState(1);
+  const [filters, setFilters] = useState<CharacterFilters>({});
 
-  const { data, isLoading } = useGetCharactersQuery({
+  const { data, isLoading, isError } = useGetCharactersQuery({
     page,
+    filters,
   });
 
-  const isFirstPage = !data?.info.prev;
-  const isLastPage = !data?.info.next;
+  const buttonGroup = useMemo(() => {
+    const isFirstPage = !data?.info.prev;
+    const isLastPage = !data?.info.next;
+
+    const buttonClassNames = [
+      "disabled:bg-transparent",
+      "disabled:text-zinc-600",
+      "disabled:cursor-not-allowed",
+      "bg-zinc-800",
+      "px-4",
+      "py-2",
+      "rounded",
+      "hover:bg-customBlue-500",
+      "hover:text-blue-800",
+    ].join(" ");
+
+    return (
+      <div className="flex justify-between mx-36 flex-row xs:flex-col">
+        <button
+          className={buttonClassNames}
+          onClick={() => setPage(page - 1)}
+          disabled={isFirstPage}
+        >
+          Previous
+        </button>
+        <span>Page {page}</span>
+        <button
+          className={buttonClassNames}
+          onClick={() => setPage(page + 1)}
+          disabled={isLastPage}
+        >
+          Next
+        </button>
+      </div>
+    );
+  }, [data, page]);
 
   const content = useMemo(() => {
     if (isLoading) {
       return "Loading...";
     }
 
-    if (!data) {
-      return "Empty data";
+    if (isError || !data?.results?.length) {
+      return (
+        <div className="flex flex-wrap justify-center">
+          <p>No characters</p>
+        </div>
+      );
     }
 
     return (
       <>
-        <ul>
+        <div className="flex flex-wrap justify-center">
           {data.results.map((character) => {
             return <CharacterCard key={character.id} character={character} />;
           })}
-        </ul>
+        </div>
       </>
     );
-  }, [data, isLoading]);
+  }, [data, isError, isLoading]);
+
+  const handleFilterChanged = useCallback((filters: CharacterFilters) => {
+    setFilters(filters);
+    setPage(1);
+  }, []);
 
   return (
     <>
+      <CharacterSearch onChange={handleFilterChanged} />
+      {buttonGroup}
       {content}
-      <button onClick={() => setPage(page - 1)} disabled={isFirstPage}>
-        Previous
-      </button>
-      <button onClick={() => setPage(page + 1)} disabled={isLastPage}>
-        Next
-      </button>
+      {buttonGroup}
     </>
   );
 };
-
-CharacterList.defaultProps = defaultProps;
-
-/**
- * Exportación del componente `CharacterList`
- */
-export default CharacterList as FC<CharacterListProps>;

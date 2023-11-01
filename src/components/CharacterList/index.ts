@@ -1,4 +1,3 @@
-import CharacterList, { CharacterListProps } from "./components/CharacterList";
+import { CharacterList } from "./components/CharacterList";
 
 export default CharacterList;
-export type { CharacterListProps };
