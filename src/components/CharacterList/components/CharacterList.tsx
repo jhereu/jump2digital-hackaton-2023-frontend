@@ -31,7 +31,7 @@ export const CharacterList: FC<CharacterListProps> = () => {
     async (newPage: number, newFilters: CharacterFilters) => {
       const response = await getCharacters({
         page: newPage,
-        filters: newFilters,
+        filter: newFilters,
       });
       setFilters(newFilters);
       setData((prevData) =>

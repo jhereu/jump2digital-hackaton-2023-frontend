@@ -1,18 +1,15 @@
 import {
-  FaBiohazard as DiseaseSpeciesIcon,
-  FaDog as AnimalSpeciesIcon,
-  FaDragon as MythologicalCreatureSpeciesIcon,
-  FaPoo as PoopyButtholeSpeciesIcon,
-  FaRobot as RobotSpeciesIcon,
+    FaBiohazard as DiseaseSpeciesIcon, FaDog as AnimalSpeciesIcon,
+    FaDragon as MythologicalCreatureSpeciesIcon, FaPoo as PoopyButtholeSpeciesIcon,
+    FaRobot as RobotSpeciesIcon
 } from "react-icons/fa";
 import { GiFrankensteinCreature as CronenbergSpeciesIcon } from "react-icons/gi";
 import { IoIosMan as HumanSpeciesIcon } from "react-icons/io";
 import { PiAlienFill as AlienSpeciesIcon } from "react-icons/pi";
 
-import { Character } from "@/lib/store/slices/Character/Character.type";
+import { Character } from "@/lib/types/Character.types";
 
 import type { FC, ReactNode } from "react";
-
 interface CharacterSpeciesTagProps {
   species: Character["species"];
   type?: Character["type"];

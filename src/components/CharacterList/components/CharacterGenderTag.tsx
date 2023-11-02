@@ -1,14 +1,10 @@
 // import { BsQuestionCircleFill as GenderUnknownIcon } from "react-icons/bs";
 import { FaGenderless as GenderGenderlessIcon } from "react-icons/fa";
-import {
-  TbGenderFemale as GenderFemaleIcon,
-  TbGenderMale as GenderMaleIcon,
-} from "react-icons/tb";
+import { TbGenderFemale as GenderFemaleIcon, TbGenderMale as GenderMaleIcon } from "react-icons/tb";
 
-import { Character } from "@/lib/store/slices/Character/Character.type";
+import { Character } from "@/lib/types/Character.types";
 
 import type { FC, ReactNode } from "react";
-
 interface CharacterGenderTagProps {
   gender: Character["gender"];
 }

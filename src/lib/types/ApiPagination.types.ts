@@ -1,7 +1,6 @@
 export interface ApiPaginationParams<T> {
   page?: number;
-  search?: string;
-  filters?: T;
+  filter?: T;
 }
 
 export interface ApiPaginationResponse<T> {

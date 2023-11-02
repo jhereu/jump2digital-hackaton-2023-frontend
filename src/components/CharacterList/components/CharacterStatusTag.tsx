@@ -1,4 +1,4 @@
-import { Character } from "@/lib/store/slices/Character/Character.type";
+import { Character } from "@/lib/types/Character.types";
 
 import type { FC, ReactNode } from "react";
 

@@ -24,11 +24,6 @@ export const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
 
   const episodeCount = character.episode.length;
 
-  const locationClassName =
-    character.location.name.length > 20 ? "text-sm" : "text-md";
-  const originClassName =
-    character.origin.name.length > 20 ? "text-sm" : "text-md";
-
   return (
     <div
       className="w-64 bg-gradient-to-br from-zinc-600 to-zinc-700 m-5 rounded-2xl cursor-help text-center pb-3  hover:from-zinc-600 hover:to-zinc-700"
@@ -37,26 +32,44 @@ export const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
       onMouseLeave={() => setIsHover(false)}
     >
       {isHover ? (
-        <div className="group px-10 py-10 text-left flex flex-col">
-          <span className="font-bold text-sm mt-4">ID</span>
-          <span className="text-zinc-400">{character.id}</span>
-          <span className="font-bold text-sm mt-4">Origin</span>
-          <span className={`text-zinc-400 ${originClassName}`}>
-            {character.origin.name}
-          </span>
-          <span className="font-bold text-sm mt-4">Last location</span>
+        <div className="group px-8 py-10 text-left flex flex-col">
+          {/* <span className="font-bold text-xs mt-4">ID</span>
+          <span className="text-xs text-zinc-400">{character.id}</span> */}
+          <span className="font-bold text-xs mt-4">Origin</span>
+          <span className="text-xs text-zinc-400">{character.origin.name}</span>
+          <span className="font-bold text-xs mt-4">Last location</span>
 
-          <span className={`text-zinc-400 ${locationClassName}`}>
+          <span className="text-xs text-zinc-400">
             {character.location.name}
           </span>
-          <span className="font-bold text-sm mt-4">Species</span>
-          <span className="text-zinc-400">{character.species}</span>
+          <span className="font-bold text-xs mt-4">Species</span>
+          <span className="text-xs text-zinc-400">{character.species}</span>
           {character.type ? (
             <>
-              <span className="font-bold text-sm mt-4">Subspecies</span>
-              <span className="text-zinc-400">{character.type}</span>
+              <span className="font-bold text-xs mt-4">Subspecies</span>
+              <span className="text-xs text-zinc-400">{character.type}</span>
             </>
           ) : null}
+          <span className="font-bold text-xs mt-4">Last episodes</span>
+          {episodeCount > 0 ? (
+            <>
+              {character.episode
+                .slice(-3)
+                .reverse()
+                .map((episode) => {
+                  return (
+                    <span
+                      key={`character-${character.id}-episode-${episode.id}`}
+                      className="text-xs text-zinc-400"
+                    >
+                      {episode.episode} - {episode.name}
+                    </span>
+                  );
+                })}
+            </>
+          ) : (
+            <span className="text-zinc-400">None</span>
+          )}
 
           {/* <span className="text-sm mt-1">Latest episode(s)</span> */}
           {/* {character.episode

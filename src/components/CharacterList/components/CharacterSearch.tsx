@@ -1,7 +1,7 @@
 import { debounce } from "debounce";
 import { FC, useRef } from "react";
 
-import { CharacterFilters } from "@/lib/store/slices/Character/Character.type";
+import { CharacterFilters } from "@/lib/types/Character.types";
 
 interface CharacterSearchProps {
   onChange(filters: CharacterFilters): void;
