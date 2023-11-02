@@ -19,12 +19,12 @@ const defaultProps = {};
  */
 const _App: FC<_AppSafeProps> = () => {
   return (
-    <div className="justify-center mx-auto w-10/12">
+    <div className="justify-center mx-auto w-10/12 m-10">
       <a href="/" target="_self">
         <img
           src={logo}
           width={600}
-          className="mx-auto max-w-full mb-24"
+          className="mx-auto max-w-full mb-24 xs:mb-12"
           alt="Rick and Morty Glossarium"
         />
       </a>

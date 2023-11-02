@@ -17,9 +17,9 @@ export interface Character {
 }
 
 export interface CharacterFilters {
-  name?: Character["name"];
-  status?: Lowercase<Character["status"]>;
-  species?: Character["species"];
-  type?: Character["type"];
-  gender?: Lowercase<Character["gender"]>;
+  name?: string;
+  status?: string;
+  species?: string;
+  type?: string;
+  gender?: string;
 }
