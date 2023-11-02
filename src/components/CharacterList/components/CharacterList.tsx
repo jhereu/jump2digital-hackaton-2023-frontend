@@ -1,7 +1,8 @@
-import { FC, useCallback, useMemo, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-import { useGetCharactersQuery } from "@/lib/store/slices/Character/Character.api";
-import { CharacterFilters } from "@/lib/store/slices/Character/Character.type";
+import { getCharacters } from "@/lib/api/chartacters.api";
+import { Character, CharacterFilters } from "@/lib/types/Character.types";
 
 import { CharacterCard } from "./CharacterCard";
 import { CharacterCardSkeleton } from "./CharacterCardSkeleton";
@@ -11,7 +12,9 @@ interface CharacterListProps {
   search?: string;
 }
 
-const skeletonCards = Array(20).map((_, i) => (
+const SKELETON_CARDS_COUNT = 6;
+
+const skeletonCards = [...Array(SKELETON_CARDS_COUNT)].map((_, i) => (
   <CharacterCardSkeleton key={`character-skeleton-${i}`} />
 ));
 
@@ -20,93 +23,59 @@ const skeletonCards = Array(20).map((_, i) => (
  */
 export const CharacterList: FC<CharacterListProps> = () => {
   const [page, setPage] = useState(1);
+  const [lastPage, setLastPage] = useState(1);
   const [filters, setFilters] = useState<CharacterFilters>({});
+  const [data, setData] = useState<Character[]>([]);
 
-  const { data, isLoading, isFetching, isError } = useGetCharactersQuery({
-    page,
-    filters,
-  });
-
-  const buttonGroup = useMemo(() => {
-    const lastPage = data?.info?.pages || 1;
-    const isFirstPage = !data?.info.prev;
-    const isLastPage = !data?.info.next;
-
-    const buttonClassNames = [
-      "disabled:bg-transparent",
-      "disabled:text-zinc-600",
-      "disabled:cursor-not-allowed",
-      "bg-zinc-800",
-      "px-4",
-      "py-2",
-      "rounded",
-      "hover:bg-customBlue-500",
-      "hover:text-blue-800",
-    ].join(" ");
-
-    return (
-      <div className="flex justify-between mx-36 flex-row xs:flex-col">
-        <button
-          className={buttonClassNames}
-          onClick={() => setPage(page - 1)}
-          disabled={isFirstPage}
-        >
-          Previous
-        </button>
-        <span>
-          Page {page} / {lastPage || 1}
-        </span>
-        <button
-          className={buttonClassNames}
-          onClick={() => setPage(page + 1)}
-          disabled={isLastPage}
-        >
-          Next
-        </button>
-      </div>
-    );
-  }, [data, page]);
-
-  const content = useMemo(() => {
-    if (isLoading || isFetching) {
-      return skeletonCards;
-    }
-
-    if (isError || !data?.results?.length) {
-      return (
-        <div className="flex flex-wrap justify-center">
-          <p>No characters</p>
-        </div>
+  const fetchData = useCallback(
+    async (newPage: number, newFilters: CharacterFilters) => {
+      const response = await getCharacters({
+        page: newPage,
+        filters: newFilters,
+      });
+      setFilters(newFilters);
+      setData((prevData) =>
+        newPage === 1 ? response.results : [...prevData, ...response.results],
       );
-    }
+      setPage(newPage);
+      setLastPage(response.info.pages);
+    },
+    [],
+  );
 
-    return (
-      <>
-        <div className="flex flex-wrap justify-center">
-          {data.results.map((character) => {
-            return (
-              <CharacterCard
-                key={`character-id-${character.id}`}
-                character={character}
-              />
-            );
-          })}
-        </div>
-      </>
-    );
-  }, [data, isError, isFetching, isLoading]);
+  const handleFilterChanged = useCallback(
+    (filters: CharacterFilters) => {
+      fetchData(1, filters);
+    },
+    [fetchData],
+  );
 
-  const handleFilterChanged = useCallback((filters: CharacterFilters) => {
-    setFilters(filters);
-    setPage(1);
-  }, []);
+  useEffect(() => {
+    fetchData(1, {});
+  }, [fetchData]);
 
   return (
     <>
       <CharacterSearch onChange={handleFilterChanged} />
-      {buttonGroup}
-      {content}
-      {buttonGroup}
+      <InfiniteScroll
+        dataLength={data.length}
+        next={() => {
+          fetchData(page + 1, filters);
+        }}
+        hasMore={page < lastPage}
+        loader={
+          <div className="flex flex-wrap justify-center">{skeletonCards}</div>
+        }
+      >
+        <div className="flex flex-wrap justify-center">
+          {data.map((character) => (
+            <CharacterCard
+              key={`character-id-${character.id}`}
+              character={character}
+            />
+          ))}
+        </div>
+      </InfiniteScroll>
     </>
   );
 };

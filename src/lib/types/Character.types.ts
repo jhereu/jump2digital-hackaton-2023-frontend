@@ -1,4 +1,5 @@
-import { Location } from "@/lib/store/slices/Location/Location.type";
+import { Episode } from "@/lib/types/Episode.types";
+import { Location } from "@/lib/types/Location.types";
 
 export interface Character {
   id: number;
@@ -10,7 +11,7 @@ export interface Character {
   origin: Location;
   location: Location;
   image: string;
-  episode: string[];
+  episode: Episode[];
   url: string;
   created: string;
 }

@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { Character } from "@/lib/store/slices/Character/Character.type";
+import { Character } from "@/lib/types/Character.types";
 
 import { CharacterGenderTag } from "./CharacterGenderTag";
 import { CharacterSpeciesTag } from "./CharacterSpeciesTag";
