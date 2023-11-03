@@ -2,9 +2,9 @@ import { FC, useState } from "react";
 
 import { Character } from "@/lib/types/Character.types";
 
-import { CharacterGenderTag } from "./CharacterGenderTag";
-import { CharacterSpeciesTag } from "./CharacterSpeciesTag";
-import { CharacterStatusTag } from "./CharacterStatusTag";
+import { CharacterCardGenderTag } from "./CharacterCardGenderTag";
+import { CharacterCardSpeciesTag } from "./CharacterCardSpeciesTag";
+import { CharacterCardStatusTag } from "./CharacterCardStatusTag";
 
 const LAST_EPISODES_MAX_COUNT = 5;
 interface CharacterCardProps {
@@ -27,7 +27,7 @@ export const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
 
   return (
     <div
-      className="w-64 bg-gradient-to-br from-zinc-600 to-zinc-700 m-5 rounded-2xl cursor-help text-center pb-3 hover:from-zinc-600 hover:to-zinc-700"
+      className="w-64 bg-gradient-to-br from-zinc-600 to-zinc-700 m-5 rounded-2xl cursor-help text-center pb-3 hover:from-zinc-800 hover:to-zinc-700"
       style={{ minHeight: "450px" }}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
@@ -90,13 +90,13 @@ export const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
             <p className="text-sm text-zinc-400">
               {episodeCount} episode{episodeCount === 1 ? "" : "s"}
             </p>
-            <CharacterStatusTag status={character.status} />
+            <CharacterCardStatusTag status={character.status} />
             <p className="mt-6 mb-2">
-              <CharacterSpeciesTag
+              <CharacterCardSpeciesTag
                 species={character.species}
                 type={character.type}
               />
-              <CharacterGenderTag gender={character.gender} />
+              <CharacterCardGenderTag gender={character.gender} />
             </p>
           </div>
         </div>

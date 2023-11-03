@@ -5,7 +5,8 @@ import { TbGenderFemale as GenderFemaleIcon, TbGenderMale as GenderMaleIcon } fr
 import { Character } from "@/lib/types/Character.types";
 
 import type { FC, ReactNode } from "react";
-interface CharacterGenderTagProps {
+
+interface CharacterCardGenderTagProps {
   gender: Character["gender"];
 }
 
@@ -39,13 +40,9 @@ const dictionary: Record<
   unknown: null,
 };
 
-/**
- * Definición del componente `CharacterGenderTag`
- *
- * @name CharacterGenderTag
- * @description
- */
-export const CharacterGenderTag: FC<CharacterGenderTagProps> = ({ gender }) => {
+export const CharacterCardGenderTag: FC<CharacterCardGenderTagProps> = ({
+  gender,
+}) => {
   const data = dictionary[gender];
 
   if (!data) {

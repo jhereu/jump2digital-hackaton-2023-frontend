@@ -2,7 +2,7 @@ import { Character } from "@/lib/types/Character.types";
 
 import type { FC, ReactNode } from "react";
 
-interface CharacterStatusTagProps {
+interface CharacterCardStatusTagProps {
   status: Character["status"];
 }
 
@@ -26,7 +26,9 @@ const dictionary: Record<
   },
 };
 
-export const CharacterStatusTag: FC<CharacterStatusTagProps> = (props) => {
+export const CharacterCardStatusTag: FC<CharacterCardStatusTagProps> = (
+  props,
+) => {
   const data = dictionary[props.status];
 
   if (!data) {

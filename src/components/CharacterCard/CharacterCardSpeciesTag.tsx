@@ -10,7 +10,8 @@ import { PiAlienFill as AlienSpeciesIcon } from "react-icons/pi";
 import { Character } from "@/lib/types/Character.types";
 
 import type { FC, ReactNode } from "react";
-interface CharacterSpeciesTagProps {
+
+interface CharacterCardSpeciesTagProps {
   species: Character["species"];
   type?: Character["type"];
 }
@@ -89,7 +90,9 @@ const dictionary: Record<
   },
 };
 
-export const CharacterSpeciesTag: FC<CharacterSpeciesTagProps> = (props) => {
+export const CharacterCardSpeciesTag: FC<CharacterCardSpeciesTagProps> = (
+  props,
+) => {
   const data = dictionary[props.species];
 
   if (!data) {

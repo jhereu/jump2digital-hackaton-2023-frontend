@@ -1,7 +1,7 @@
 import { ApiPaginationParams, ApiPaginationResponse } from "@/lib/types/ApiPagination.types";
 import { Character, CharacterFilters } from "@/lib/types/Character.types";
 
-import { GRAPHQL_URL } from "./config";
+export const GRAPHQL_URL = "https://rickandmortyapi.com/graphql";
 
 export const GET_CHARACTERS_QUERY = `
   query GetCharacters($page: Int!, $filter: FilterCharacter) {
