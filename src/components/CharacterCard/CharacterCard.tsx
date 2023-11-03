@@ -1,4 +1,6 @@
-import { FC, useState } from "react";
+import "./CharacterCard.css";
+
+import { FC } from "react";
 
 import { Character } from "@/lib/types/Character.types";
 
@@ -18,8 +20,6 @@ interface CharacterCardProps {
  * @description
  */
 export const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
-  const [isHover, setIsHover] = useState(false);
-
   const nameClassName = character.name.length > 20 ? "text-md" : "text-xl";
   const nameMarginBottom = character.name.length > 20 ? "mb-3" : "mb-2";
 
@@ -27,13 +27,39 @@ export const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
 
   return (
     <div
-      className="w-64 bg-gradient-to-br from-zinc-600 to-zinc-700 m-5 rounded-2xl cursor-help text-center pb-3 hover:from-zinc-800 hover:to-zinc-700"
+      className="character-card w-64 m-5 pb-3 cursor-help"
       style={{ minHeight: "450px" }}
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
     >
-      {isHover ? (
-        <div className="group px-8 md:py-10 sm:py-5 text-left flex flex-col text-xs">
+      <div className="character-card-content">
+        <div className="character-card-front bg-gradient-to-br from-zinc-600 to-zinc-700 rounded-2xl cursor-help text-center ">
+          <img
+            src={character.image}
+            alt={character.name}
+            aria-description={`Image of ${character.name}`}
+            className="rounded-t-2xl mb-5 max-w-full"
+          />
+          <div className="px-5">
+            <h3
+              className={`group-hover:text-customBlue-500 text-zinc-300 ${nameMarginBottom}`}
+            >
+              <span className={`font-bold ${nameClassName}`}>
+                {character.name}
+              </span>
+            </h3>
+            <p className="text-sm text-zinc-400">
+              {episodeCount} episode{episodeCount === 1 ? "" : "s"}
+            </p>
+            <CharacterCardStatusTag status={character.status} />
+            <p className="mt-6 mb-2">
+              <CharacterCardSpeciesTag
+                species={character.species}
+                type={character.type}
+              />
+              <CharacterCardGenderTag gender={character.gender} />
+            </p>
+          </div>
+        </div>
+        <div className="character-card-back px-8 py-10 text-left flex flex-col text-xs bg-gradient-to-br rounded-2xl  from-zinc-800 to-zinc-700">
           <span className="font-bold text-xs mt-4">ID</span>
           <span className="text-xs text-zinc-400">{character.id}</span>
           <span className="font-bold mt-4">Origin</span>
@@ -71,36 +97,7 @@ export const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
             <span className="text-zinc-400">None</span>
           )}
         </div>
-      ) : (
-        <div className="group">
-          <img
-            src={character.image}
-            alt={character.name}
-            aria-description={`Image of ${character.name}`}
-            className="rounded-t-2xl mb-5 max-w-full group-hover:hidden"
-          />
-          <div className="px-5">
-            <h3
-              className={`group-hover:text-customBlue-500 text-zinc-300 ${nameMarginBottom}`}
-            >
-              <span className={`font-bold ${nameClassName}`}>
-                {character.name}
-              </span>
-            </h3>
-            <p className="text-sm text-zinc-400">
-              {episodeCount} episode{episodeCount === 1 ? "" : "s"}
-            </p>
-            <CharacterCardStatusTag status={character.status} />
-            <p className="mt-6 mb-2">
-              <CharacterCardSpeciesTag
-                species={character.species}
-                type={character.type}
-              />
-              <CharacterCardGenderTag gender={character.gender} />
-            </p>
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 };

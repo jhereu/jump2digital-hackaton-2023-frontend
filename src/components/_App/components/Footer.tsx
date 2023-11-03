@@ -19,6 +19,14 @@ export const Footer: FC = () => {
           className=" text-customGreen-500 hover:underline hover:text-customBlue-500"
         >
           Jump2Digital Hackaton 2023
+        </a>{" "}
+        — Thanks to{" "}
+        <a
+          href="https://rickandmortyapi.com/"
+          target="_blank"
+          className=" text-customGreen-500 hover:underline hover:text-customBlue-500"
+        >
+          Rick and Morty API
         </a>
       </p>
     </div>

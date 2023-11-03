@@ -57,7 +57,12 @@ export const CharacterList: FC = () => {
   const content = useMemo(() => {
     if (data.length === 0) {
       if (isLoading) {
-        return skeletonCards;
+        return (
+          <>
+            {skeletonCards}
+            {skeletonCards}
+          </>
+        );
       }
 
       return <CharacterListEmpty search={filters.name} />;
@@ -73,7 +78,7 @@ export const CharacterList: FC = () => {
 
   return (
     <>
-      <CharacterListSearch className="mb-10" onChange={handleFilterChanged} />
+      <CharacterListSearch onChange={handleFilterChanged} />
 
       <InfiniteScroll
         dataLength={data.length}

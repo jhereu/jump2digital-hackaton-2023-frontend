@@ -4,6 +4,7 @@ import logo from "@/assets/images/Rick_and_Morty.svg";
 import CharacterList from "@/components/CharacterList";
 
 import { Footer } from "./Footer";
+import { ScrollToTop } from "./ScrollToTop";
 
 /**
  * Props del componente `_App`
@@ -30,6 +31,7 @@ const _App: FC<_AppSafeProps> = () => {
       </a>
       <CharacterList />
       <Footer />
+      <ScrollToTop />
     </div>
   );
 };
