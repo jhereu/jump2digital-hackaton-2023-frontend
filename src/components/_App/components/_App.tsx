@@ -1,7 +1,7 @@
 import { FC } from "react";
+import { Outlet } from "react-router-dom";
 
 import logo from "@/assets/images/Rick_and_Morty.svg";
-import CharacterList from "@/components/CharacterList";
 
 import { Footer } from "./Footer";
 import { ScrollToTop } from "./ScrollToTop";
@@ -29,7 +29,7 @@ const _App: FC<_AppSafeProps> = () => {
           alt="Rick and Morty Glossarium"
         />
       </a>
-      <CharacterList />
+      <Outlet />
       <Footer />
       <ScrollToTop />
     </div>

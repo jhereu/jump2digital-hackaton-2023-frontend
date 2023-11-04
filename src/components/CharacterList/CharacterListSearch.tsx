@@ -55,7 +55,10 @@ export const CharacterListSearch: FC<CharacterListSearchProps> = ({
       const lowercaseName = name.toLowerCase();
 
       return (
-        <div className="w-full xl:w-3/12 lg:w-4/12 md:w-6/12 p-2 mb-2">
+        <div
+          key={`filter-${lowercaseName}-input`}
+          className="w-full xl:w-3/12 lg:w-4/12 md:w-6/12 p-2 mb-2"
+        >
           <label htmlFor={lowercaseName} className="mb-2">
             {name}
           </label>

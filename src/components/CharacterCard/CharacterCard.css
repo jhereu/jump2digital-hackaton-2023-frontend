@@ -10,12 +10,16 @@
 
 .character-card {
   perspective: 1000px;
+  min-height: 450px;
 }
 
+.character-card-content {
+  position: relative;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
 .character-card:hover .character-card-content {
   transform: rotateY(180deg);
-  transform-style: preserve-3d;
-  transition: transform 0.5s;
 }
 
 .character-card-back {
@@ -26,7 +30,9 @@
 .character-card-back {
   position: absolute;
   min-height: 450px;
-  min-width: 100%;
-  backface-visibility: hidden;
+  height: 100%;
+  width: 100%;
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
 }

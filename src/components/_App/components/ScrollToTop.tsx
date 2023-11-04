@@ -24,7 +24,7 @@ export const ScrollToTop: FC<ScrollToTopProps> = () => {
 
   return show ? (
     <div
-      className="float-right bottom-0 right-0 fixed cursor-pointer text-3xl p-3 bg-zinc-500"
+      className="float-right bottom-0 right-0 fixed cursor-pointer text-3xl p-3 bg-zinc-500 rounded-tl-lg"
       onClick={handleClick}
     >
       <ScrollToTopIcon className="text-zinc-800" />

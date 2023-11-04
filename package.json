@@ -1,8 +1,13 @@
 {
   "name": "jump2digital-hackaton-fase1",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "author": {
+    "name": "Jordi Hereu Mayo",
+    "email": "jhereumayo@gmail.com",
+    "url": "https://www.linkedin.com/in/jordihereuayo/"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -16,7 +21,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
-    "react-infinite-scroll-component": "^6.1.0"
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-router-dom": "^6.18.0"
   },
   "devDependencies": {
     "@types/debounce": "^1.2.3",
