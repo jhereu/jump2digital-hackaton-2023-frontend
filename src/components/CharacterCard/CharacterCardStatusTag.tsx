@@ -6,6 +6,9 @@ interface CharacterCardStatusTagProps {
   status: Character["status"];
 }
 
+/**
+ * Dictionary to map status to icons and classNames
+ */
 const dictionary: Record<
   Character["status"],
   {
@@ -26,6 +29,9 @@ const dictionary: Record<
   },
 };
 
+/**
+ * Component to display a Status tag with colors and icon in a CharacterCard
+ */
 export const CharacterCardStatusTag: FC<CharacterCardStatusTagProps> = (
   props,
 ) => {

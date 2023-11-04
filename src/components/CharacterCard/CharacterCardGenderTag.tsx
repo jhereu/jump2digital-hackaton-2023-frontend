@@ -10,6 +10,9 @@ interface CharacterCardGenderTagProps {
   gender: Character["gender"];
 }
 
+/**
+ * Dictionary to map genders to icons and classNames
+ */
 const dictionary: Record<
   Character["gender"],
   {
@@ -40,6 +43,9 @@ const dictionary: Record<
   unknown: null,
 };
 
+/**
+ * Component to display a Gender tag with colors and icon in a CharacterCard
+ */
 export const CharacterCardGenderTag: FC<CharacterCardGenderTagProps> = ({
   gender,
 }) => {

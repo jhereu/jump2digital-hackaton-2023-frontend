@@ -7,6 +7,10 @@ export interface CharacterListEmptyProps {
 
 const burp = <span className="text-zinc-500 italic">*burp*</span>;
 
+/**
+ * Component for displaying the empty character search page.
+ * It show a burping Rick mocking the user.
+ */
 export const CharacterListEmpty: FC<CharacterListEmptyProps> = (props) => {
   return (
     <div className="flex flex-col gap-10 text-center">

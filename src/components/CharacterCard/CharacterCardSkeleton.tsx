@@ -1,5 +1,9 @@
 import { FC } from "react";
 
+/**
+ * Component for a loading CharacterCard skeleton
+ * It glows in dimmed colors with the shape of a loaded CharacterCard
+ */
 export const CharacterCardSkeleton: FC = () => {
   return (
     <div className="animate-pulse group w-64 bg-zinc-600 border-2 border-zinc-800 m-5 rounded-2xl cursor-pointer text-center pb-3">

@@ -6,10 +6,9 @@ import { CHARACTER_LIST_ROUTE } from "@/lib/config/routes";
 import { Character } from "@/lib/types/Character.types";
 
 /**
- * Definición del componente `CharacterShow`
+ * Component for Character details
  *
- * @name CharacterShow
- * @description
+ * It has a button to go back to Character list
  */
 export const CharacterShow: FC = () => {
   const { id } = useParams();

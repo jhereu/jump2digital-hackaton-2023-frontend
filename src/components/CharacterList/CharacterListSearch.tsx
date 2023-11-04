@@ -9,23 +9,31 @@ interface CharacterListSearchProps {
 }
 
 /**
- * Definición del componente `CharacterSearch`
+ * Component for introducing character filters.
  *
- * @name CharacterSearch
- * @description
+ * It is an uncontrolled component because the output is debounced to prevent server overload
+ *
+ * It has basic filters and advanced filters:
+ * - Basic: Only shows an input that search by name
+ * - Advanced: Shows inputs for name, status, species, type and gender
  */
 export const CharacterListSearch: FC<CharacterListSearchProps> = ({
   onChange,
 }) => {
+  // Flag for showing advanced or basic filters
   const [showAdvancedFilters, setShowAdvancedFilter] = useState(false);
+
+  // Selected filters
   const [filters, setFilters] = useState<CharacterFilters>({});
 
+  // Refs for every input
   const nameRef = useRef<HTMLInputElement>(null);
   const statusRef = useRef<HTMLInputElement>(null);
   const speciesRef = useRef<HTMLInputElement>(null);
   const typeRef = useRef<HTMLInputElement>(null);
   const genderRef = useRef<HTMLInputElement>(null);
 
+  // When changing input, trigger props.onChange callback
   const handleInputChange = useCallback(() => {
     const newFilters = {
       name: nameRef?.current?.value,
@@ -39,6 +47,7 @@ export const CharacterListSearch: FC<CharacterListSearchProps> = ({
     onChange(newFilters);
   }, [onChange]);
 
+  // Content for advanced filters
   const advancedFilters = useMemo(() => {
     if (!showAdvancedFilters) {
       return null;
@@ -87,6 +96,7 @@ export const CharacterListSearch: FC<CharacterListSearchProps> = ({
     return <div className="flex flex-row flex-wrap">{filters}</div>;
   }, [showAdvancedFilters]);
 
+  // Text show below filters to show the applied filters
   const displayedFilterText = useMemo(() => {
     const notNullFilters = Object.entries(filters).filter(([, val]) =>
       Boolean(val),

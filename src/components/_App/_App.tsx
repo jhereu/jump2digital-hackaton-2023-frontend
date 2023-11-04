@@ -7,18 +7,13 @@ import { Footer } from "./Footer";
 import { ScrollToTop } from "./ScrollToTop";
 
 /**
- * Props del componente `_App`
+ * Content wrapper for sections. Includes:
+ * - Rick and morty Logo
+ * - Outlet (React-router-dom displayed container)
+ * - Footer
+ * - Scroll-to-top button
  */
-export type _AppSafeProps = _AppProps & typeof defaultProps;
-
-export interface _AppProps {}
-
-const defaultProps = {};
-
-/**
- * Definición del componente `_App`
- */
-const _App: FC<_AppSafeProps> = () => {
+export const App: FC = () => {
   return (
     <div className="justify-center mx-auto w-10/12 m-10">
       <a href="/" target="_self">
@@ -35,10 +30,3 @@ const _App: FC<_AppSafeProps> = () => {
     </div>
   );
 };
-
-_App.defaultProps = defaultProps;
-
-/**
- * Exportación del componente `_App`
- */
-export default _App as FC<_AppProps>;

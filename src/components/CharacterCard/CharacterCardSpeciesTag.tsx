@@ -16,6 +16,9 @@ interface CharacterCardSpeciesTagProps {
   type?: Character["type"];
 }
 
+/**
+ * Dictionary to map species to icons and classNames
+ */
 const dictionary: Record<
   Character["species"],
   {
@@ -90,6 +93,9 @@ const dictionary: Record<
   },
 };
 
+/**
+ * Component to display a Species tag with colors and icon in a CharacterCard
+ */
 export const CharacterCardSpeciesTag: FC<CharacterCardSpeciesTagProps> = (
   props,
 ) => {
@@ -103,7 +109,6 @@ export const CharacterCardSpeciesTag: FC<CharacterCardSpeciesTagProps> = (
   let title = `Species: ${props.species}`;
 
   if (props.type) {
-    // text += `/${props.type}`;
     title += `, Type: ${props.type}`;
   }
 

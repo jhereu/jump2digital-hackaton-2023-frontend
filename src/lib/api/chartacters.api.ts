@@ -1,4 +1,11 @@
-import { ApiPaginationParams, ApiPaginationResponse } from "@/lib/types/ApiPagination.types";
+/**
+ * Functions to fetch characters from public API via GraphQL
+ */
+
+import {
+  ApiPaginationParams,
+  ApiPaginationResponse,
+} from "@/lib/types/ApiPagination.types";
 import { Character, CharacterFilters } from "@/lib/types/Character.types";
 
 export const GRAPHQL_URL = "https://rickandmortyapi.com/graphql";

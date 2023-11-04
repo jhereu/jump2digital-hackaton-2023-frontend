@@ -1,15 +1,22 @@
 import { FC, useCallback, useEffect, useState } from "react";
 import { ImArrowUp as ScrollToTopIcon } from "react-icons/im";
 
-export interface ScrollToTopProps {}
+// Minimum px to scroll before showing button
+const MIN_SCROLLING_PX = 200;
 
-export const ScrollToTop: FC<ScrollToTopProps> = () => {
+/**
+ * Component for scrolling to top when scrolling down through the page
+ */
+export const ScrollToTop: FC = () => {
+  // Flag to show or hide the button
   const [show, setShow] = useState(false);
 
+  // Show only when scrolling more than MIN_SCROLLING_XP
   const handleScroll = useCallback(() => {
-    setShow(document.documentElement.scrollTop > 200);
+    setShow(document.documentElement.scrollTop > MIN_SCROLLING_PX);
   }, []);
 
+  // Scroll when clicked
   const handleClick = useCallback(() => {
     window.scrollTo({
       top: 0,
@@ -17,8 +24,10 @@ export const ScrollToTop: FC<ScrollToTopProps> = () => {
     });
   }, []);
 
+  // Add scroll listener to the page.
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    // Remove scroll listener when unmounting
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
