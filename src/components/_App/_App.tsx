@@ -16,14 +16,12 @@ import { ScrollToTop } from "./ScrollToTop";
 export const App: FC = () => {
   return (
     <div className="justify-center mx-auto w-10/12 m-10">
-      <a href="/" target="_self">
-        <img
-          src={logo}
-          width={600}
-          className="mx-auto max-w-full mb-24 xs:mb-12"
-          alt="Rick and Morty Glossarium"
-        />
-      </a>
+      <img
+        src={logo}
+        width={600}
+        className="mx-auto max-w-full mb-24 xs:mb-12"
+        alt="Rick and Morty Glossarium"
+      />
       <Outlet />
       <Footer />
       <ScrollToTop />

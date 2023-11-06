@@ -2,7 +2,7 @@ import "./index.css";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { App } from "@/components/_App/_App";
 import { CharacterList } from "@/components/CharacterList/CharacterList";
@@ -27,12 +27,8 @@ const router = createBrowserRouter([
         element: <CharacterShow />,
       },
       {
-        path: ROOT_ROUTE,
-        element: <Navigate to="/characters" />,
-      },
-      {
         path: "*",
-        element: <Navigate to="/" />,
+        element: <CharacterList />,
       },
     ],
   },
