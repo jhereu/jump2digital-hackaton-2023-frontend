@@ -8,6 +8,7 @@
     "email": "jhereumayo@gmail.com",
     "url": "https://www.linkedin.com/in/jordihereuayo/"
   },
+  "homepage": "https://jhereu.github.io/jump2digital-hackaton-2023-frontend",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
